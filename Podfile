@@ -3,7 +3,10 @@ platform :ios, '10.0'
 target 'GalleryImagesUpload' do
   use_frameworks!
 
-  # Pods for GalleryImagesUpload
+  pod 'SVProgressHUD'
+  pod 'Swinject'
+  pod 'SwinjectStoryboard'
+  pod 'CropViewController'
 
   target 'GalleryImagesUploadTests' do
     inherit! :search_paths

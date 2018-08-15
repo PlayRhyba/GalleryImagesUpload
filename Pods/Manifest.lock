@@ -1,0 +1,29 @@
+PODS:
+  - CropViewController (2.3.7)
+  - SVProgressHUD (2.2.5)
+  - Swinject (2.4.1)
+  - SwinjectStoryboard (2.0.2):
+    - Swinject (~> 2.4)
+
+DEPENDENCIES:
+  - CropViewController
+  - SVProgressHUD
+  - Swinject
+  - SwinjectStoryboard
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - CropViewController
+    - SVProgressHUD
+    - Swinject
+    - SwinjectStoryboard
+
+SPEC CHECKSUMS:
+  CropViewController: a9d579b526926c4e1caf754a89a9ac1c20aaa8eb
+  SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
+  Swinject: f7f15a9672e99328c1f07f277091087917215700
+  SwinjectStoryboard: 365698aec11b57c6b14a3c1f52d0308759d377bf
+
+PODFILE CHECKSUM: 1ed042306d2ab3f11f9c024e210d50ce277c1302
+
+COCOAPODS: 1.5.3
