@@ -13,7 +13,6 @@ final class ImagesManager {
     private struct Constants {
         
         static let jpegCompretionQuality: CGFloat = 0.85
-        static let contentsFileName = "contents.json"
         static let imagesFolderName = "images"
         static let originalFileNameSuffix = "original"
         static let previewFileNameSuffix = "preview"
@@ -21,7 +20,7 @@ final class ImagesManager {
         
     }
     
-    private let dataLoader: DataLoaderProtocol
+    private let dataUploader: DataUploaderProtocol
     
     private let jsonEncoder: JSONEncoder = {
         let encoder = JSONEncoder()
@@ -39,8 +38,8 @@ final class ImagesManager {
     
     // MARK: Initialization
     
-    init(dataLoader: DataLoaderProtocol) {
-        self.dataLoader = dataLoader
+    init(dataUploader: DataUploaderProtocol) {
+        self.dataUploader = dataUploader
     }
     
 }
@@ -62,38 +61,38 @@ extension ImagesManager: ImagesManagerProtocol {
         let uuid = UUID().uuidString
         var urls = Image.URLs()
         
-        dataLoader.upload(data: originalImageData,
-                          path: makeImageFilePath(uuid: uuid, suffix: Constants.originalFileNameSuffix),
-                          progress: progress) { [weak self] in
-                            guard let `self` = self else { return }
-                            
-                            switch $0 {
-                            case .failure(let error):
-                                completion(.failure(error))
+        dataUploader.upload(data: originalImageData,
+                            path: makeImageFilePath(uuid: uuid, suffix: Constants.originalFileNameSuffix),
+                            progress: progress) { [weak self] in
+                                guard let `self` = self else { return }
                                 
-                            case.success(let url):
-                                urls.original = url
-                                
-                                self.dataLoader.upload(data: previewImageData,
-                                                       path: self.makeImageFilePath(uuid: uuid, suffix: Constants.previewFileNameSuffix),
-                                                       progress: progress) {
-                                                        switch $0 {
-                                                        case .failure(let error):
-                                                            completion(.failure(error))
-                                                            
-                                                        case .success(let url):
-                                                            urls.preview = url
-                                                            
-                                                            let image = Image(uuid: uuid, date: Date(), urls: urls)
-                                                            
-                                                            // TODO: get current content
-                                                            
-                                                            // TODO: update current content
-                                                            
-                                                            completion(.success([image]))
-                                                        }
+                                switch $0 {
+                                case .failure(let error):
+                                    completion(.failure(error))
+                                    
+                                case.success(let url):
+                                    urls.original = url
+                                    
+                                    self.dataUploader.upload(data: previewImageData,
+                                                             path: self.makeImageFilePath(uuid: uuid, suffix: Constants.previewFileNameSuffix),
+                                                             progress: progress) {
+                                                                switch $0 {
+                                                                case .failure(let error):
+                                                                    completion(.failure(error))
+                                                                    
+                                                                case .success(let url):
+                                                                    urls.preview = url
+                                                                    
+                                                                    let image = Image(uuid: uuid, date: Date(), urls: urls)
+                                                                    
+                                                                    // TODO: get current content
+                                                                    
+                                                                    // TODO: update current content
+                                                                    
+                                                                    completion(.success([image]))
+                                                                }
+                                    }
                                 }
-                            }
         }
     }
     
@@ -106,10 +105,6 @@ extension ImagesManager: ImagesManagerProtocol {
 // MARK: Private
 
 private extension ImagesManager {
-    
-    var contentsFilePath: String {
-        return "\(Constants.imagesFolderName)/\(Constants.contentsFileName)"
-    }
     
     func makeImageFilePath(uuid: String, suffix: String) -> String {
         return "\(Constants.imagesFolderName)/\(uuid)_\(suffix).\(Constants.imageFileExtension)"

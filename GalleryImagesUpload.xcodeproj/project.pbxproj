@@ -14,8 +14,6 @@
 		E340A0AC2125571B00BAC623 /* GalleryCellPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E340A0AB2125571B00BAC623 /* GalleryCellPresenter.swift */; };
 		E340A0AF2125679D00BAC623 /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = E340A0AE2125679D00BAC623 /* Image.swift */; };
 		E340A0B12125B92600BAC623 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E340A0B02125B92600BAC623 /* GoogleService-Info.plist */; };
-		E340A0B72125C40300BAC623 /* DataLoaderProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E340A0B62125C40300BAC623 /* DataLoaderProtocol.swift */; };
-		E340A0B92125C41600BAC623 /* DataLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = E340A0B82125C41600BAC623 /* DataLoader.swift */; };
 		E340A0BC2125C9F200BAC623 /* OperationResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = E340A0BB2125C9F200BAC623 /* OperationResult.swift */; };
 		E340A0BE2125CA4600BAC623 /* OperationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E340A0BD2125CA4600BAC623 /* OperationError.swift */; };
 		E340A0C02125D16700BAC623 /* ImagesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E340A0BF2125D16700BAC623 /* ImagesManager.swift */; };
@@ -38,6 +36,8 @@
 		E3BD8AAE212477410062C6B3 /* GalleryAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3BD8AAD212477410062C6B3 /* GalleryAssembly.swift */; };
 		E3BD8AB02124781D0062C6B3 /* DependencyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3BD8AAF2124781D0062C6B3 /* DependencyManager.swift */; };
 		E3BD8AB62124B8900062C6B3 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3BD8AB52124B8900062C6B3 /* ImagePicker.swift */; };
+		E3D6D3E72126346100722636 /* DataUploaderProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D6D3E52126346100722636 /* DataUploaderProtocol.swift */; };
+		E3D6D3E82126346100722636 /* DataUploader.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D6D3E62126346100722636 /* DataUploader.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,8 +60,6 @@
 		E340A0AB2125571B00BAC623 /* GalleryCellPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryCellPresenter.swift; sourceTree = "<group>"; };
 		E340A0AE2125679D00BAC623 /* Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
 		E340A0B02125B92600BAC623 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		E340A0B62125C40300BAC623 /* DataLoaderProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataLoaderProtocol.swift; sourceTree = "<group>"; };
-		E340A0B82125C41600BAC623 /* DataLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataLoader.swift; sourceTree = "<group>"; };
 		E340A0BB2125C9F200BAC623 /* OperationResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationResult.swift; sourceTree = "<group>"; };
 		E340A0BD2125CA4600BAC623 /* OperationError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationError.swift; sourceTree = "<group>"; };
 		E340A0BF2125D16700BAC623 /* ImagesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesManager.swift; sourceTree = "<group>"; };
@@ -88,6 +86,8 @@
 		E3BD8AAD212477410062C6B3 /* GalleryAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryAssembly.swift; sourceTree = "<group>"; };
 		E3BD8AAF2124781D0062C6B3 /* DependencyManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependencyManager.swift; sourceTree = "<group>"; };
 		E3BD8AB52124B8900062C6B3 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
+		E3D6D3E52126346100722636 /* DataUploaderProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataUploaderProtocol.swift; sourceTree = "<group>"; };
+		E3D6D3E62126346100722636 /* DataUploader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataUploader.swift; sourceTree = "<group>"; };
 		E4C882A2CD114DEC05179A6D /* Pods_GalleryImagesUploadTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GalleryImagesUploadTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F167E37F9BD14DAA581C0B7B /* Pods-GalleryImagesUpload.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GalleryImagesUpload.release.xcconfig"; path = "Pods/Target Support Files/Pods-GalleryImagesUpload/Pods-GalleryImagesUpload.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -147,15 +147,6 @@
 				E340A0BF2125D16700BAC623 /* ImagesManager.swift */,
 			);
 			path = ImagesManager;
-			sourceTree = "<group>";
-		};
-		E340A0B52125C3E800BAC623 /* DataLoader */ = {
-			isa = PBXGroup;
-			children = (
-				E340A0B62125C40300BAC623 /* DataLoaderProtocol.swift */,
-				E340A0B82125C41600BAC623 /* DataLoader.swift */,
-			);
-			path = DataLoader;
 			sourceTree = "<group>";
 		};
 		E340A0BA2125C9E500BAC623 /* OperationResult */ = {
@@ -273,7 +264,7 @@
 			children = (
 				E340A0AD2125679100BAC623 /* DataObjects */,
 				E340A0BA2125C9E500BAC623 /* OperationResult */,
-				E340A0B52125C3E800BAC623 /* DataLoader */,
+				E3D6D3E42126346100722636 /* DataUploader */,
 				E340A0B42125C39C00BAC623 /* ImagesManager */,
 			);
 			path = Model;
@@ -306,6 +297,15 @@
 				E3BD8AAD212477410062C6B3 /* GalleryAssembly.swift */,
 			);
 			path = Assemblies;
+			sourceTree = "<group>";
+		};
+		E3D6D3E42126346100722636 /* DataUploader */ = {
+			isa = PBXGroup;
+			children = (
+				E3D6D3E52126346100722636 /* DataUploaderProtocol.swift */,
+				E3D6D3E62126346100722636 /* DataUploader.swift */,
+			);
+			path = DataUploader;
 			sourceTree = "<group>";
 		};
 		FAD72585EF36ABD73DE947B4 /* Frameworks */ = {
@@ -451,6 +451,7 @@
 				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/Swinject/Swinject.framework",
 				"${BUILT_PRODUCTS_DIR}/SwinjectStoryboard/SwinjectStoryboard.framework",
+				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -463,6 +464,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Swinject.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwinjectStoryboard.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -495,16 +497,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E340A0B72125C40300BAC623 /* DataLoaderProtocol.swift in Sources */,
 				E3BD8AA52124720A0062C6B3 /* ScreenView.swift in Sources */,
 				E38710FF2125F36100AF2DC0 /* ImagesManagerAssembly.swift in Sources */,
 				E3BD8AA3212471FD0062C6B3 /* ScreenPresenter.swift in Sources */,
 				E3BD8A9F212471DA0062C6B3 /* View.swift in Sources */,
+				E3D6D3E82126346100722636 /* DataUploader.swift in Sources */,
 				E3BD8AA7212474A40062C6B3 /* GalleryProtocols.swift in Sources */,
 				E340A0A8212556F600BAC623 /* BaseTableViewCell.swift in Sources */,
 				E3BD8A9D212471D00062C6B3 /* Presenter.swift in Sources */,
 				E3BD8AA92124755F0062C6B3 /* BaseViewController.swift in Sources */,
-				E340A0B92125C41600BAC623 /* DataLoader.swift in Sources */,
 				E3BD8AAE212477410062C6B3 /* GalleryAssembly.swift in Sources */,
 				E340A0BE2125CA4600BAC623 /* OperationError.swift in Sources */,
 				E340A0AA2125570C00BAC623 /* GalleryCell.swift in Sources */,
@@ -516,6 +517,7 @@
 				E340A0C02125D16700BAC623 /* ImagesManager.swift in Sources */,
 				E340A0AC2125571B00BAC623 /* GalleryCellPresenter.swift in Sources */,
 				E3BD8AAB212475C60062C6B3 /* GalleryPresenter.swift in Sources */,
+				E3D6D3E72126346100722636 /* DataUploaderProtocol.swift in Sources */,
 				E3BD8AB62124B8900062C6B3 /* ImagePicker.swift in Sources */,
 				E3BD8A7321246C000062C6B3 /* AppDelegate.swift in Sources */,
 				E3BD8AB02124781D0062C6B3 /* DependencyManager.swift in Sources */,
