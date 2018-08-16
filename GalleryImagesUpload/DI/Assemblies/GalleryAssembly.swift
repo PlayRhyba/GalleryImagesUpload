@@ -16,7 +16,9 @@ final class GalleryAssembly: Assembly {
         }
         
         container.register(GalleryPresenterProtocol.self) { c in
-            return GalleryPresenter()
+            let imagesManager = c.resolve(ImagesManagerProtocol.self)!
+            
+            return GalleryPresenter(imagesManager: imagesManager)
         }
     }
     

@@ -7,6 +7,9 @@ target 'GalleryImagesUpload' do
   pod 'Swinject'
   pod 'SwinjectStoryboard'
   pod 'CropViewController'
+  pod 'AlamofireImage'
+  pod 'Firebase/Core'
+  pod 'Firebase/Storage'
 
   target 'GalleryImagesUploadTests' do
     inherit! :search_paths

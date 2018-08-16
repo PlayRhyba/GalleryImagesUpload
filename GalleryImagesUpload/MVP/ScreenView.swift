@@ -8,7 +8,7 @@
 
 import SVProgressHUD
 
-protocol ScreenViewProtocol: ViewProtocol {
+protocol HUDDisplayable {
     
     /// Show HUD
     func showHUD()
@@ -28,13 +28,17 @@ protocol ScreenViewProtocol: ViewProtocol {
     
 }
 
+protocol ScreenViewProtocol: ViewProtocol, HUDDisplayable {}
+
 extension ScreenViewProtocol {
     
     func showHUD() {
+        SVProgressHUD.setDefaultMaskType(.black)
         SVProgressHUD.show()
     }
     
     func showHUD(progress: Float) {
+        SVProgressHUD.setDefaultMaskType(.black)
         SVProgressHUD.showProgress(progress)
     }
     
