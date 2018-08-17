@@ -10,15 +10,9 @@ import Foundation
 
 struct Image: Codable {
     
-    struct URLs: Codable {
-        
-        var original: URL?
-        var preview: URL?
-        
-    }
-    
     let uuid: String
     let date: Date
-    let urls: URLs
+    var original: URL?
+    var preview: URL?
     
 }

@@ -39,6 +39,7 @@ final class ImagePicker: NSObject {
                     let picker = UIImagePickerController()
                     picker.sourceType = UIImagePickerController.isSourceTypeAvailable(self.sourceType) ? self.sourceType : .photoLibrary
                     picker.delegate = self
+                    picker.modalPresentationStyle = .overCurrentContext
                     
                     self.viewController?.present(picker, animated: true)
                 } else {

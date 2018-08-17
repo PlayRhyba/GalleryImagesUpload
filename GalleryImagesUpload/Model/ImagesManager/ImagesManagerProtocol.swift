@@ -10,19 +10,25 @@ import UIKit
 
 protocol ImagesManagerProtocol {
     
-    /// Upload image. Image is represented by original and preview images
+    /// Upload image
     ///
     /// - Parameters:
-    ///   - image: original and preview images
-    ///   - progress: progress
+    ///   - image: image to upload
     ///   - completion: completion handler with updated array of stored images
-    func upload(image: (original: UIImage, preview: UIImage),
-                progress: ((Progress?) -> Void)?,
+    func upload(image: UIImage,
                 completion: @escaping (OperationResult<[Image], OperationError>) -> Void)
     
     /// Fetch stored images
     ///
     /// - Parameter completion: completion handler with array of stored images
     func fetchImages(completion: @escaping (OperationResult<[Image], OperationError>) -> Void)
+    
+    /// Remove image
+    ///
+    /// - Parameters:
+    ///   - image: image to removew
+    ///   - completion: completion handler with updated array of stored images
+    func delete(image: Image,
+                completion: @escaping (OperationResult<[Image], OperationError>) -> Void)
     
 }

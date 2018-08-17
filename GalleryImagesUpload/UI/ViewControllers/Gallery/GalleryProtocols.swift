@@ -64,6 +64,11 @@ protocol GalleryViewProtocol: ScreenViewProtocol {
     /// Reload view's content
     func reloadData()
     
+    /// Update placeholder visibility
+    ///
+    /// - Parameter isHidden: is placeholder hidden
+    func updatePlaceholder(isHidden: Bool)
+    
     /// Show selected image
     ///
     /// - Parameter artist: artist

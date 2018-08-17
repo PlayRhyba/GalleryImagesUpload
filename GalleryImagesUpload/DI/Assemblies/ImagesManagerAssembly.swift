@@ -11,13 +11,13 @@ import Swinject
 final class ImagesManagerAssembly: Assembly {
     
     func assemble(container: Container) {
-        container.register(DataUploaderProtocol.self) { _ in DataUploader() }
+        container.register(DataLoaderProtocol.self) { _ in DataLoader() }
             .inObjectScope(.container)
         
         container.register(ImagesManagerProtocol.self) { c in
-            let dataUploader = c.resolve(DataUploaderProtocol.self)!
+            let dataLoader = c.resolve(DataLoaderProtocol.self)!
             
-            return ImagesManager(dataUploader: dataUploader)
+            return ImagesManager(dataLoader: dataLoader)
             }.inObjectScope(.container)
     }
     

@@ -10,12 +10,6 @@ import UIKit
 
 final class GalleryPresenter: ScreenPresenter {
     
-    private struct Constants {
-        
-        static let maxImageDimension: CGFloat = 100
-        
-    }
-    
     private let imagesManager: ImagesManagerProtocol
     private var cellPresenters: [GalleryCellPresenterProtocol] = []
     
@@ -23,6 +17,19 @@ final class GalleryPresenter: ScreenPresenter {
     
     init(imagesManager: ImagesManagerProtocol) {
         self.imagesManager = imagesManager
+    }
+    
+    // MARK: Presenter
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        getView()?.showHUD(status: "Fetching images...")
+        
+        imagesManager.fetchImages { [weak self] result in
+            self?.getView()?.dismissHUD()
+            self?.handleFetchResult(result)
+        }
     }
     
 }
@@ -35,13 +42,12 @@ extension GalleryPresenter: GalleryPresenterProtocol {
                 guard let `self` = self,
                     let image = image else { return }
                 
-                self.getView()?.showHUD()
+                self.getView()?.showHUD(status: "Adding image...")
                 
-                self.imagesManager.upload(image: (image, image.scaled(to: Constants.maxImageDimension)),
-                                          progress: { self.getView()?.showHUD(progress: Float($0?.fractionCompleted ?? 0)) },
-                                          completion: { retult in
-                                            self.getView()?.dismissHUD()
-                })
+                self.imagesManager.upload(image: image) { [weak self] result in
+                    self?.getView()?.dismissHUD()
+                    self?.handleFetchResult(result)
+                }
             }
         }
     }
@@ -55,11 +61,19 @@ extension GalleryPresenter: GalleryPresenterProtocol {
     }
     
     func selectCell(at indexPath: IndexPath) {
-        
+        let image = cellPresenters[indexPath.row].image
+        getView()?.show(image: image)
     }
     
     func deleteCell(at indexPath: IndexPath) {
+        let image = cellPresenters[indexPath.row].image
         
+        getView()?.showHUD(status: "Removing image...")
+        
+        imagesManager.delete(image: image) { [weak self] result in
+            self?.getView()?.dismissHUD()
+            self?.handleFetchResult(result)
+        }
     }
     
 }
@@ -70,6 +84,25 @@ private extension GalleryPresenter {
     
     func getView() -> GalleryViewProtocol? {
         return view as? GalleryViewProtocol
+    }
+    
+    func reloadData(images: [Image]) {
+        cellPresenters = images
+            .sorted(by: { $0.date > $1.date })
+            .map { GalleryCellPresenter(image: $0) }
+        
+        getView()?.reloadData()
+        getView()?.updatePlaceholder(isHidden: !cellPresenters.isEmpty)
+    }
+    
+    func handleFetchResult(_ result: OperationResult<[Image], OperationError>) {
+        switch result {
+        case .success(let images):
+            self.reloadData(images: images)
+            
+        case .failure(let error):
+            self.getView()?.show(errorMessage: error.localizedDescription)
+        }
     }
     
 }

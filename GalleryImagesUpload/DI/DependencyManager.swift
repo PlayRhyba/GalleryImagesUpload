@@ -15,7 +15,8 @@ final class DependencyManager {
         let container = SwinjectStoryboard.defaultContainer
         
         let assemblies: [Assembly] = [ImagesManagerAssembly(),
-                                      GalleryAssembly()]
+                                      GalleryAssembly(),
+                                      PreviewAssembly()]
         
         _ = Assembler(assemblies, container: container)
         

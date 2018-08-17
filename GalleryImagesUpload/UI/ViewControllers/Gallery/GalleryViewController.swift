@@ -17,6 +17,7 @@ final class GalleryViewController: BaseViewController {
     }
     
     @IBOutlet private weak var tableView: UITableView!
+    @IBOutlet private weak var placeholderLabel: UILabel!
     private var imagePicker: ImagePicker?
     
 }
@@ -32,6 +33,10 @@ extension GalleryViewController: GalleryViewProtocol {
          UIAlertAction(title: "Camera", style: .default, handler: { _ in completion(.camera) }),
          UIAlertAction(title: "Cancel", style: .cancel)]
             .forEach { alert.addAction($0) }
+        
+        if let popoverController = alert.popoverPresentationController {
+            popoverController.barButtonItem = navigationItem.rightBarButtonItem
+        }
         
         present(alert, animated: true)
     }
@@ -50,8 +55,20 @@ extension GalleryViewController: GalleryViewProtocol {
         tableView.reloadData()
     }
     
+    func updatePlaceholder(isHidden: Bool) {
+        placeholderLabel.isHidden = isHidden
+    }
+    
     func show(image: Image) {
+        let identifier = PreviewViewController.identifier
         
+        guard let vc = storyboard?.instantiateViewController(withIdentifier: identifier) as? PreviewViewController else {
+            return
+        }
+        
+        (vc.presenter as? PreviewPresenterProtocol)?.image = image
+        
+        navigationController?.pushViewController(vc, animated: true)
     }
     
 }
@@ -79,6 +96,14 @@ extension GalleryViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return LayoutConstants.cellHeight
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 0
+    }
+    
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 0
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

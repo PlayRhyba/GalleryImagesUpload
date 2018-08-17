@@ -16,9 +16,9 @@ final class GalleryCell: BaseTableViewCell {
     
     // MARK: Lifecycle
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        configureAppearance()
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        previewImage.image = nil
     }
     
 }
@@ -33,17 +33,6 @@ extension GalleryCell: GalleryCellViewProtocol {
         if let previewURL = previewURL {
             previewImage.af_setImage(withURL: previewURL)
         }
-    }
-    
-}
-
-// MARK: Private
-
-private extension GalleryCell {
-    
-    func configureAppearance() {
-        previewImage.layer.borderColor = UIColor.lightGray.cgColor
-        previewImage.layer.borderWidth = 1.0
     }
     
 }

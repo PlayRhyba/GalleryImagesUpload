@@ -8,11 +8,11 @@
 
 /// Error's representation
 ///
-/// - loading: data uploading/downloading error
+/// - dataLoader: data loader errors
 /// - serialization: data serialization/deserialization error
 enum OperationError: Error {
     
-    case loading(String)
+    case dataLoader(String)
     case serialization(String)
     
 }

@@ -11,7 +11,6 @@ import Foundation
 final class GalleryCellPresenter: Presenter, GalleryCellPresenterProtocol {
     
     let image: Image
-    private let dateFormatter = ISO8601DateFormatter()
     
     // MARK: Initialization
     
@@ -24,8 +23,8 @@ final class GalleryCellPresenter: Presenter, GalleryCellPresenterProtocol {
     override func viewDidAttach() {
         super.viewDidAttach()
         
-        getView()?.update(title: dateFormatter.string(from: image.date),
-                          previewURL: image.urls.preview)
+        getView()?.update(title: DateFormatter.displaying.string(from: image.date),
+                          previewURL: image.preview)
     }
     
 }

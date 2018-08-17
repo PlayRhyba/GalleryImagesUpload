@@ -10,7 +10,6 @@ target 'GalleryImagesUpload' do
   pod 'AlamofireImage'
   pod 'Firebase/Core'
   pod 'Firebase/Storage'
-  pod 'Firebase/Database'
 
   target 'GalleryImagesUploadTests' do
     inherit! :search_paths
