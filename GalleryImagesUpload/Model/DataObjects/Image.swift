@@ -9,7 +9,7 @@
 import Foundation
 
 /// Stored image's representation
-struct Image: Codable {
+struct Image: Codable, Equatable {
     
     /// UUID
     let uuid: String
@@ -22,5 +22,13 @@ struct Image: Codable {
     
     /// URL to preview image
     var preview: URL?
+    
+}
+
+extension Image: Hashable {
+    
+    var hashValue: Int {
+        return uuid.hashValue
+    }
     
 }

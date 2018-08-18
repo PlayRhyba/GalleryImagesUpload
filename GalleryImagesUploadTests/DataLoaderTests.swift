@@ -18,7 +18,7 @@ final class DataLoaderTests: QuickSpec {
         static let testBucket = "gs://galleryimagesupload_test"
         static let testFilePath = "test.dat"
         static let testData = "Test data".data(using: .utf8)!
-        static let timeout = 10.0
+        static let timeout = 15.0
         static let maxDownloadingFileSize: Int64 = 1024
         
     }

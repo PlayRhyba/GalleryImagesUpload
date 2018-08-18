@@ -14,10 +14,23 @@ final class ImagesManagerAssembly: Assembly {
         container.register(DataLoaderProtocol.self) { _ in DataLoader() }
             .inObjectScope(.container)
         
-        container.register(ImagesManagerProtocol.self) { c in
+        container.register(ImageDatabaseProtocol.self) { c in
             let dataLoader = c.resolve(DataLoaderProtocol.self)!
             
-            return ImagesManager(dataLoader: dataLoader)
+            return ImageDatabase(dataLoader: dataLoader)
+            }.inObjectScope(.container)
+        
+        container.register(ImageDataProcessorProtocol.self) { _ in ImageDataProcessor() }
+            .inObjectScope(.container)
+        
+        container.register(ImagesManagerProtocol.self) { c in
+            let dataLoader = c.resolve(DataLoaderProtocol.self)!
+            let imageDatabase = c.resolve(ImageDatabaseProtocol.self)!
+            let imageDataProcessor = c.resolve(ImageDataProcessorProtocol.self)!
+            
+            return ImagesManager(dataLoader: dataLoader,
+                                 imageDatabase: imageDatabase,
+                                 imageDataProcessor: imageDataProcessor)
             }.inObjectScope(.container)
     }
     

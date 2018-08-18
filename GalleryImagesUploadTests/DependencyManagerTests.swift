@@ -29,22 +29,34 @@ final class DependencyManagerTests: QuickSpec {
                     expect(dataLoader).toNot(beNil())
                 }
                 
-                it("should contain images manager") {
-                    let dataLoader = container?.resolve(ImagesManagerProtocol.self)
+                it("should contain image database") {
+                    let imageDatabase = container?.resolve(ImageDatabaseProtocol.self)
                     
-                    expect(dataLoader).toNot(beNil())
+                    expect(imageDatabase).toNot(beNil())
+                }
+                
+                it("should contain image data processor") {
+                    let imageDataProcessor = container?.resolve(ImageDataProcessorProtocol.self)
+                    
+                    expect(imageDataProcessor).toNot(beNil())
+                }
+                
+                it("should contain images manager") {
+                    let imagesManager = container?.resolve(ImagesManagerProtocol.self)
+                    
+                    expect(imagesManager).toNot(beNil())
                 }
                 
                 it("should contain Gallery screen presenter") {
-                    let dataLoader = container?.resolve(GalleryPresenterProtocol.self)
+                    let galleryPresenter = container?.resolve(GalleryPresenterProtocol.self)
                     
-                    expect(dataLoader).toNot(beNil())
+                    expect(galleryPresenter).toNot(beNil())
                 }
                 
                 it("should contain Preview screen presenter") {
-                    let dataLoader = container?.resolve(PreviewPresenterProtocol.self)
+                    let previewPresenter = container?.resolve(PreviewPresenterProtocol.self)
                     
-                    expect(dataLoader).toNot(beNil())
+                    expect(previewPresenter).toNot(beNil())
                 }
             }
         }

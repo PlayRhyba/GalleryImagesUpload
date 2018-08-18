@@ -56,9 +56,10 @@ extension DataLoaderProtocol {
     }
     
     func download(path: String,
+                  maxSize: Int64,
                   completion: @escaping (OperationResult<Data, OperationError>) -> Void) {
         download(path: path,
-                 maxSize: GlobalConstants.maxDownloadingFileSize,
+                 maxSize: maxSize,
                  progress: nil,
                  completion: completion)
     }

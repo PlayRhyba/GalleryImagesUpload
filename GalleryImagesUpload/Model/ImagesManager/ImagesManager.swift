@@ -10,33 +10,27 @@ import UIKit
 
 final class ImagesManager {
     
-    private enum ContentFileModificationType {
+    private struct Constants {
         
-        case add
-        case remove
+        static let imagesFolder = "images"
+        static let originalFileSuffix = "original"
+        static let previewFileSuffix = "preview"
+        static let imageFileExtension = "jpg"
         
     }
     
     private let dataLoader: DataLoaderProtocol
-    
-    private let jsonEncoder: JSONEncoder = {
-        let encoder = JSONEncoder()
-        encoder.dateEncodingStrategy = .iso8601
-        
-        return encoder
-    }()
-    
-    private let jsonDecoder: JSONDecoder = {
-        let decoder = JSONDecoder()
-        decoder.dateDecodingStrategy = .iso8601
-        
-        return decoder
-    }()
+    private let imageDatabase: ImageDatabaseProtocol
+    private let imageDataProcessor: ImageDataProcessorProtocol
     
     // MARK: Initialization
     
-    init(dataLoader: DataLoaderProtocol) {
+    init(dataLoader: DataLoaderProtocol,
+         imageDatabase: ImageDatabaseProtocol,
+         imageDataProcessor: ImageDataProcessorProtocol) {
         self.dataLoader = dataLoader
+        self.imageDatabase = imageDatabase
+        self.imageDataProcessor = imageDataProcessor
     }
     
 }
@@ -47,7 +41,7 @@ extension ImagesManager: ImagesManagerProtocol {
     
     func upload(image: UIImage,
                 completion: @escaping (OperationResult<[Image], OperationError>) -> Void) {
-        makeData(from: image) { [weak self] (originalImageData, previewImageData) in
+        imageDataProcessor.makeData(from: image) { [weak self] (originalImageData, previewImageData) in
             guard let `self` = self else { return }
             
             guard let originalImageData = originalImageData,
@@ -82,9 +76,7 @@ extension ImagesManager: ImagesManagerProtocol {
                                               original: urls.original,
                                               preview: urls.preview)
                             
-                            self?.updateContentFile(modification: .add,
-                                                    image: image,
-                                                    completion: completion)
+                            self?.imageDatabase.add(image: image, completion: completion)
                         }
                     }
                 }
@@ -93,23 +85,7 @@ extension ImagesManager: ImagesManagerProtocol {
     }
     
     func fetchImages(completion: @escaping (OperationResult<[Image], OperationError>) -> Void) {
-        dataLoader.download(path: GlobalConstants.contentsFileName) { [weak self] result in
-            guard let `self` = self else { return }
-            
-            switch result {
-            case .failure(let error):
-                completion(.failure(error))
-                
-            case .success(let data):
-                guard let images = try? self.jsonDecoder.decode([Image].self, from: data) else {
-                    completion(.failure(.serialization("Data can't be decoded")))
-                    
-                    break
-                }
-                
-                completion(.success(images))
-            }
-        }
+        imageDatabase.fetch(completion: completion)
     }
     
     func delete(image: Image,
@@ -128,9 +104,7 @@ extension ImagesManager: ImagesManagerProtocol {
                         completion(.failure(.dataLoader(error.localizedDescription)))
                         
                     case .success:
-                        self?.updateContentFile(modification: .remove,
-                                                image: image,
-                                                completion: completion)
+                        self?.imageDatabase.delete(image: image, completion: completion)
                     }
                 }
             }
@@ -144,64 +118,12 @@ extension ImagesManager: ImagesManagerProtocol {
 private extension ImagesManager {
     
     func makeImageFilePath(uuid: String, suffix: String) -> String {
-        return "\(GlobalConstants.imagesFolder)/\(uuid)_\(suffix).\(GlobalConstants.imageFileExtension)"
+        return "\(Constants.imagesFolder)/\(uuid)_\(suffix).\(Constants.imageFileExtension)"
     }
     
     func makePaths(uuid: String) -> (original: String, preview: String) {
-        return (makeImageFilePath(uuid: uuid, suffix: GlobalConstants.originalFileSuffix),
-                makeImageFilePath(uuid: uuid, suffix: GlobalConstants.previewFileSuffix))
-    }
-    
-    func makeData(from image: UIImage,
-                  completion: @escaping (Data?, Data?) -> Void) {
-        DispatchQueue.global().async {
-            let previewImage = image.scaled(to: GlobalConstants.maxPreviewImageDimension)
-            
-            let originalImageData = UIImageJPEGRepresentation(image, GlobalConstants.jpegCompretionQuality)
-            let previewImageData = UIImageJPEGRepresentation(previewImage, GlobalConstants.jpegCompretionQuality)
-            
-            DispatchQueue.main.async {
-                completion(originalImageData, previewImageData)
-            }
-        }
-    }
-    
-    private func updateContentFile(modification: ContentFileModificationType,
-                                   image: Image,
-                                   completion: @escaping (OperationResult<[Image], OperationError>) -> Void) {
-        fetchImages { [weak self] result in
-            guard let `self` = self else { return }
-            
-            switch result {
-            case .failure(let error):
-                completion(.failure(error))
-                
-            case .success(var images):
-                switch modification {
-                case .add:
-                    images.append(image)
-                    
-                case .remove:
-                    images = images.filter { $0.uuid != image.uuid }
-                }
-                
-                guard let data = try? self.jsonEncoder.encode(images) else {
-                    completion(.failure(.serialization("Data can't be encoded")))
-                    
-                    break
-                }
-                
-                self.dataLoader.upload(data: data, path: GlobalConstants.contentsFileName) { result in
-                    switch result {
-                    case .failure(let error):
-                        completion(.failure(error))
-                        
-                    case .success:
-                        completion(.success(images))
-                    }
-                }
-            }
-        }
+        return (makeImageFilePath(uuid: uuid, suffix: Constants.originalFileSuffix),
+                makeImageFilePath(uuid: uuid, suffix: Constants.previewFileSuffix))
     }
     
 }
