@@ -8,11 +8,19 @@
 
 import Foundation
 
+/// Stored image's representation
 struct Image: Codable {
     
+    /// UUID
     let uuid: String
+    
+    /// Creation date
     let date: Date
+    
+    /// URL to original image
     var original: URL?
+    
+    /// URL to preview image
     var preview: URL?
     
 }

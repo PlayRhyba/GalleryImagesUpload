@@ -10,17 +10,6 @@ import UIKit
 
 final class ImagesManager {
     
-    private struct Constants {
-        
-        static let jpegCompretionQuality: CGFloat = 0.85
-        static let imagesFolder = "images"
-        static let originalFileSuffix = "original"
-        static let previewFileSuffix = "preview"
-        static let imageFileExtension = "jpg"
-        static let contentsFileName = "contents.json"
-        
-    }
-    
     private enum ContentFileModificationType {
         
         case add
@@ -104,7 +93,7 @@ extension ImagesManager: ImagesManagerProtocol {
     }
     
     func fetchImages(completion: @escaping (OperationResult<[Image], OperationError>) -> Void) {
-        dataLoader.download(path: Constants.contentsFileName) { [weak self] result in
+        dataLoader.download(path: GlobalConstants.contentsFileName) { [weak self] result in
             guard let `self` = self else { return }
             
             switch result {
@@ -155,12 +144,12 @@ extension ImagesManager: ImagesManagerProtocol {
 private extension ImagesManager {
     
     func makeImageFilePath(uuid: String, suffix: String) -> String {
-        return "\(Constants.imagesFolder)/\(uuid)_\(suffix).\(Constants.imageFileExtension)"
+        return "\(GlobalConstants.imagesFolder)/\(uuid)_\(suffix).\(GlobalConstants.imageFileExtension)"
     }
     
     func makePaths(uuid: String) -> (original: String, preview: String) {
-        return (makeImageFilePath(uuid: uuid, suffix: Constants.originalFileSuffix),
-                makeImageFilePath(uuid: uuid, suffix: Constants.previewFileSuffix))
+        return (makeImageFilePath(uuid: uuid, suffix: GlobalConstants.originalFileSuffix),
+                makeImageFilePath(uuid: uuid, suffix: GlobalConstants.previewFileSuffix))
     }
     
     func makeData(from image: UIImage,
@@ -168,8 +157,8 @@ private extension ImagesManager {
         DispatchQueue.global().async {
             let previewImage = image.scaled(to: GlobalConstants.maxPreviewImageDimension)
             
-            let originalImageData = UIImageJPEGRepresentation(image, Constants.jpegCompretionQuality)
-            let previewImageData = UIImageJPEGRepresentation(previewImage, Constants.jpegCompretionQuality)
+            let originalImageData = UIImageJPEGRepresentation(image, GlobalConstants.jpegCompretionQuality)
+            let previewImageData = UIImageJPEGRepresentation(previewImage, GlobalConstants.jpegCompretionQuality)
             
             DispatchQueue.main.async {
                 completion(originalImageData, previewImageData)
@@ -202,7 +191,7 @@ private extension ImagesManager {
                     break
                 }
                 
-                self.dataLoader.upload(data: data, path: Constants.contentsFileName) { result in
+                self.dataLoader.upload(data: data, path: GlobalConstants.contentsFileName) { result in
                     switch result {
                     case .failure(let error):
                         completion(.failure(error))

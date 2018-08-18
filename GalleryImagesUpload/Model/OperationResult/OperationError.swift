@@ -12,6 +12,7 @@
 /// - serialization: data serialization/deserialization error
 enum OperationError: Error {
     
+    case generic(String)
     case dataLoader(String)
     case serialization(String)
     

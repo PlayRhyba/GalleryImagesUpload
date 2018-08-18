@@ -56,7 +56,7 @@ extension DataLoader: DataLoaderProtocol {
                   maxSize: Int64,
                   progress: ((Progress?) -> Void)?,
                   completion: @escaping (OperationResult<Data, OperationError>) -> Void) {
-        let file = Storage.storage().reference().child(path)
+        let file = storage.reference().child(path)
         
         let task = file.getData(maxSize: maxSize) { data, error in
             if let error = error {
@@ -79,7 +79,7 @@ extension DataLoader: DataLoaderProtocol {
     
     func delete(path: String,
                 completion: @escaping (OperationResult<Void, OperationError>) -> Void) {
-        let file = Storage.storage().reference().child(path)
+        let file = storage.reference().child(path)
         
         file.delete { error in
             if let error = error {

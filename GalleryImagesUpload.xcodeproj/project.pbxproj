@@ -20,11 +20,15 @@
 		E340A0C22125D18B00BAC623 /* ImagesManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E340A0C12125D18B00BAC623 /* ImagesManagerProtocol.swift */; };
 		E38710FF2125F36100AF2DC0 /* ImagesManagerAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38710FE2125F36100AF2DC0 /* ImagesManagerAssembly.swift */; };
 		E38711032126108D00AF2DC0 /* UIImage+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38711022126108D00AF2DC0 /* UIImage+Extensions.swift */; };
+		E3A945FF212831060090A1D1 /* DataLoaderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A945FD212831060090A1D1 /* DataLoaderTests.swift */; };
+		E3A94600212831060090A1D1 /* DependencyManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A945FE212831060090A1D1 /* DependencyManagerTests.swift */; };
+		E3A94602212831330090A1D1 /* OperationResultTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A94601212831330090A1D1 /* OperationResultTests.swift */; };
+		E3A94608212854390090A1D1 /* ImagesManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A94607212854390090A1D1 /* ImagesManagerTests.swift */; };
+		E3A9460A212854780090A1D1 /* DataLoaderStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A94609212854780090A1D1 /* DataLoaderStub.swift */; };
 		E3BD8A7321246C000062C6B3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3BD8A7221246C000062C6B3 /* AppDelegate.swift */; };
 		E3BD8A7821246C000062C6B3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E3BD8A7621246C000062C6B3 /* Main.storyboard */; };
 		E3BD8A7A21246C010062C6B3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E3BD8A7921246C010062C6B3 /* Assets.xcassets */; };
 		E3BD8A7D21246C010062C6B3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E3BD8A7B21246C010062C6B3 /* LaunchScreen.storyboard */; };
-		E3BD8A8821246C010062C6B3 /* GalleryImagesUploadTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3BD8A8721246C010062C6B3 /* GalleryImagesUploadTests.swift */; };
 		E3BD8A9921246D500062C6B3 /* GalleryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3BD8A9621246D500062C6B3 /* GalleryViewController.swift */; };
 		E3BD8A9D212471D00062C6B3 /* Presenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3BD8A9C212471D00062C6B3 /* Presenter.swift */; };
 		E3BD8A9F212471DA0062C6B3 /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3BD8A9E212471DA0062C6B3 /* View.swift */; };
@@ -72,6 +76,11 @@
 		E340A0C12125D18B00BAC623 /* ImagesManagerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesManagerProtocol.swift; sourceTree = "<group>"; };
 		E38710FE2125F36100AF2DC0 /* ImagesManagerAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesManagerAssembly.swift; sourceTree = "<group>"; };
 		E38711022126108D00AF2DC0 /* UIImage+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extensions.swift"; sourceTree = "<group>"; };
+		E3A945FD212831060090A1D1 /* DataLoaderTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataLoaderTests.swift; sourceTree = "<group>"; };
+		E3A945FE212831060090A1D1 /* DependencyManagerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DependencyManagerTests.swift; sourceTree = "<group>"; };
+		E3A94601212831330090A1D1 /* OperationResultTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationResultTests.swift; sourceTree = "<group>"; };
+		E3A94607212854390090A1D1 /* ImagesManagerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagesManagerTests.swift; sourceTree = "<group>"; };
+		E3A94609212854780090A1D1 /* DataLoaderStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataLoaderStub.swift; sourceTree = "<group>"; };
 		E3BD8A6F21246C000062C6B3 /* GalleryImagesUpload.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GalleryImagesUpload.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E3BD8A7221246C000062C6B3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E3BD8A7721246C000062C6B3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -79,7 +88,6 @@
 		E3BD8A7C21246C010062C6B3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E3BD8A7E21246C010062C6B3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E3BD8A8321246C010062C6B3 /* GalleryImagesUploadTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GalleryImagesUploadTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		E3BD8A8721246C010062C6B3 /* GalleryImagesUploadTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryImagesUploadTests.swift; sourceTree = "<group>"; };
 		E3BD8A8921246C010062C6B3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E3BD8A9621246D500062C6B3 /* GalleryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GalleryViewController.swift; sourceTree = "<group>"; };
 		E3BD8A9C212471D00062C6B3 /* Presenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Presenter.swift; sourceTree = "<group>"; };
@@ -187,6 +195,14 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		E3A946062128542D0090A1D1 /* Mock */ = {
+			isa = PBXGroup;
+			children = (
+				E3A94609212854780090A1D1 /* DataLoaderStub.swift */,
+			);
+			path = Mock;
+			sourceTree = "<group>";
+		};
 		E3BD8A6621246C000062C6B3 = {
 			isa = PBXGroup;
 			children = (
@@ -229,7 +245,11 @@
 		E3BD8A8621246C010062C6B3 /* GalleryImagesUploadTests */ = {
 			isa = PBXGroup;
 			children = (
-				E3BD8A8721246C010062C6B3 /* GalleryImagesUploadTests.swift */,
+				E3A946062128542D0090A1D1 /* Mock */,
+				E3A945FE212831060090A1D1 /* DependencyManagerTests.swift */,
+				E3A94601212831330090A1D1 /* OperationResultTests.swift */,
+				E3A945FD212831060090A1D1 /* DataLoaderTests.swift */,
+				E3A94607212854390090A1D1 /* ImagesManagerTests.swift */,
 				E3BD8A8921246C010062C6B3 /* Info.plist */,
 			);
 			path = GalleryImagesUploadTests;
@@ -373,6 +393,7 @@
 				E3BD8A7F21246C010062C6B3 /* Sources */,
 				E3BD8A8021246C010062C6B3 /* Frameworks */,
 				E3BD8A8121246C010062C6B3 /* Resources */,
+				0D1327BECC54DE383FF8A824 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -399,6 +420,7 @@
 					};
 					E3BD8A8221246C010062C6B3 = {
 						CreatedOnToolsVersion = 9.4.1;
+						LastSwiftMigration = 0940;
 						TestTargetID = E3BD8A6E21246C000062C6B3;
 					};
 				};
@@ -444,6 +466,26 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		0D1327BECC54DE383FF8A824 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-GalleryImagesUploadTests/Pods-GalleryImagesUploadTests-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Nimble/Nimble.framework",
+				"${BUILT_PRODUCTS_DIR}/Quick/Quick.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Nimble.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Quick.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-GalleryImagesUploadTests/Pods-GalleryImagesUploadTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		8647B20FD77254EA7B1DA263 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -558,7 +600,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E3BD8A8821246C010062C6B3 /* GalleryImagesUploadTests.swift in Sources */,
+				E3A94608212854390090A1D1 /* ImagesManagerTests.swift in Sources */,
+				E3A94602212831330090A1D1 /* OperationResultTests.swift in Sources */,
+				E3A9460A212854780090A1D1 /* DataLoaderStub.swift in Sources */,
+				E3A94600212831060090A1D1 /* DependencyManagerTests.swift in Sources */,
+				E3A945FF212831060090A1D1 /* DataLoaderTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -750,8 +796,9 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = A3C914C76C8B25A31AC82ACE /* Pods-GalleryImagesUploadTests.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = GalleryImagesUploadTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -761,6 +808,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.my.GalleryImagesUploadTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/GalleryImagesUpload.app/GalleryImagesUpload";
@@ -771,8 +819,9 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 6AFC23F264A1BF908A2333E8 /* Pods-GalleryImagesUploadTests.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = GalleryImagesUploadTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (

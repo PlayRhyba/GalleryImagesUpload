@@ -34,7 +34,6 @@ private extension AppDelegate {
     
     func setupInitialView() {
         let window = UIWindow(frame: UIScreen.main.bounds)
-        
         window.makeKeyAndVisible()
         self.window = window
         

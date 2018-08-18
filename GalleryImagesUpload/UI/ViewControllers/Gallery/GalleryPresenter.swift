@@ -42,7 +42,7 @@ extension GalleryPresenter: GalleryPresenterProtocol {
                 guard let `self` = self,
                     let image = image else { return }
                 
-                self.getView()?.showHUD(status: "Adding image...")
+                self.getView()?.showHUD(status: "Uploading image...")
                 
                 self.imagesManager.upload(image: image) { [weak self] result in
                     self?.getView()?.dismissHUD()
