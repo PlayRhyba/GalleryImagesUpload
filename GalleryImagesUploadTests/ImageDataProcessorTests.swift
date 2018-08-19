@@ -13,11 +13,7 @@ import Nimble
 
 final class ImageDataProcessorTests: QuickSpec {
     
-    private let testImage: UIImage = {
-        let path = Bundle(for: ImageDataProcessorTests.self).path(forResource: "testImage", ofType: "jpg")!
-        
-        return UIImage(contentsOfFile: path)!
-    }()
+    private let testImage = makeTestImage()
     
     override func spec() {
         describe("ImageDataProcessor") {

@@ -13,16 +13,7 @@ import Nimble
 
 final class ImagesManagerTests: QuickSpec {
     
-    private let testImages: [Image] = {
-        let path = Bundle(for: ImageDatabaseTests.self).path(forResource: "testData", ofType: "json")!
-        let url = URL(fileURLWithPath: path)
-        let data = try! Data(contentsOf: url)
-        
-        let decoder = JSONDecoder()
-        decoder.dateDecodingStrategy = .iso8601
-        
-        return try! decoder.decode([Image].self, from: data)
-    }()
+    private let testImages = makeTestImageObjects()
     
     override func spec() {
         describe("ImagesManager") {

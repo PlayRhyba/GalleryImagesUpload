@@ -20,12 +20,7 @@ final class ImageDatabaseTests: QuickSpec {
         return decoder
     }()
     
-    private let testImagesData: Data = {
-        let path = Bundle(for: ImageDatabaseTests.self).path(forResource: "testData", ofType: "json")!
-        let url = URL(fileURLWithPath: path)
-        
-        return try! Data(contentsOf: url)
-    }()
+    private let testImagesData = makeTestImagesData()
     
     var testImages: [Image] {
         return try! jsonDecoder.decode([Image].self, from: testImagesData)

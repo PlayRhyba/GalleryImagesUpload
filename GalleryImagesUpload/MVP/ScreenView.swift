@@ -26,13 +26,6 @@ protocol ScreenViewProtocol: ViewProtocol {
     /// Dismiss HUD
     func dismissHUD()
     
-    /// Show alert
-    ///
-    /// - Parameters:
-    ///   - title: title
-    ///   - message: message
-    func showAlert(title: String?, message: String?)
-    
 }
 
 extension ScreenViewProtocol {
@@ -53,17 +46,6 @@ extension ScreenViewProtocol {
     
     func dismissHUD() {
         SVProgressHUD.dismiss()
-    }
-    
-}
-
-extension ScreenViewProtocol where Self: UIViewController {
-    
-    func showAlert(title: String?, message: String?) {
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default))
-        
-        present(alert, animated: true)
     }
     
 }

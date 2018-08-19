@@ -18,6 +18,8 @@ final class ImageDataProcessorStub {
     
 }
 
+// MARK: ImageDataProcessorProtocol
+
 extension ImageDataProcessorStub: ImageDataProcessorProtocol {
     
     func makeData(from image: UIImage,

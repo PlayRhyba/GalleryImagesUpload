@@ -22,6 +22,8 @@ final class DataLoaderStub {
     
 }
 
+// MARK: DataLoaderProtocol
+
 extension DataLoaderStub: DataLoaderProtocol {
     
     func upload(data: Data,

@@ -25,10 +25,20 @@ struct Image: Codable, Equatable {
     
 }
 
+// MARK: Hashable
+
 extension Image: Hashable {
     
     var hashValue: Int {
         return uuid.hashValue
     }
     
+}
+
+// MARK: Comparable
+
+extension Image: Comparable {
+    static func < (lhs: Image, rhs: Image) -> Bool {
+        return lhs.date < rhs.date
+    }
 }

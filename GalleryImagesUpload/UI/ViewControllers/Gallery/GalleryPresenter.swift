@@ -88,7 +88,7 @@ private extension GalleryPresenter {
     
     func reloadData(images: [Image]) {
         cellPresenters = images
-            .sorted(by: { $0.date > $1.date })
+            .sorted { $0 > $1 }
             .map { GalleryCellPresenter(image: $0) }
         
         getView()?.reloadData()
@@ -101,7 +101,7 @@ private extension GalleryPresenter {
             self.reloadData(images: images)
             
         case .failure(let error):
-            self.getView()?.show(errorMessage: error.localizedDescription)
+            self.getView()?.show(errorMessage: error.message)
         }
     }
     
