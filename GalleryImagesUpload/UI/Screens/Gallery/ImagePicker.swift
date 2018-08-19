@@ -44,7 +44,7 @@ final class ImagePicker: NSObject {
                     self.viewController?.present(picker, animated: true)
                 } else {
                     self.showAlert(title: "Permission is not allowed",
-                                   message: "Please check the app's permissions in Settings")
+                                   message: "Please check the app's camera permissions in Settings")
                     
                     self.completion(nil)
                 }
