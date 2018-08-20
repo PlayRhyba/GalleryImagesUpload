@@ -88,7 +88,7 @@ private extension GalleryPresenter {
     
     func reloadData(images: [Image]) {
         cellPresenters = images
-            .sorted { $0 > $1 }
+            .sorted(by: >)
             .map { GalleryCellPresenter(image: $0) }
         
         getView()?.reloadData()

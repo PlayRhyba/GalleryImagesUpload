@@ -242,7 +242,7 @@ final class GalleryPresenterTests: QuickSpec {
                     
                     sut.viewDidLoad()
                     
-                    let expected = self.testImages.sorted { $0 > $1 }
+                    let expected = self.testImages.sorted(by: >)
                     
                     let actual = Array(0..<sut.numberOfCells())
                         .compactMap { sut.cellPresenter(at: IndexPath(row: $0, section: 0))?.image }
@@ -258,7 +258,7 @@ final class GalleryPresenterTests: QuickSpec {
                     sut.viewDidLoad()
                     
                     let expected = self.testImages
-                        .sorted { $0 > $1 }
+                        .sorted(by: >)
                         .first
                     
                     sut.selectCell(at: IndexPath(row: 0, section: 0))
