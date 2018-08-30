@@ -61,6 +61,11 @@ protocol GalleryViewProtocol: ScreenViewProtocol {
     ///   - completion: completion handler with selected image
     func displayImagePicker(source: ImageSource, completion: @escaping (UIImage?) -> Void)
     
+    /// Show delete confirmation alert
+    ///
+    /// - Parameter confirmed: action handler
+    func showDeleteConfirmationAlert(confirmed: @escaping (Bool) -> Void)
+    
     /// Reload view's content
     func reloadData()
     

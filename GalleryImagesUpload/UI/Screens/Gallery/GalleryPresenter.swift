@@ -66,13 +66,18 @@ extension GalleryPresenter: GalleryPresenterProtocol {
     }
     
     func deleteCell(at indexPath: IndexPath) {
-        let image = cellPresenters[indexPath.row].image
-        
-        getView()?.showHUD(status: "Removing image...")
-        
-        imagesManager.delete(image: image) { [weak self] result in
-            self?.getView()?.dismissHUD()
-            self?.handleFetchResult(result)
+        getView()?.showDeleteConfirmationAlert { [weak self] confirmed in
+            guard confirmed,
+                let `self` = self else { return }
+            
+            let image = self.cellPresenters[indexPath.row].image
+            
+            self.getView()?.showHUD(status: "Removing image...")
+            
+            self.imagesManager.delete(image: image) { [weak self] result in
+                self?.getView()?.dismissHUD()
+                self?.handleFetchResult(result)
+            }
         }
     }
     

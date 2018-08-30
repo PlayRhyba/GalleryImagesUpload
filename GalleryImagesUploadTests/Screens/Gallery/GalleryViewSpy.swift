@@ -14,9 +14,11 @@ final class GalleryViewSpy {
     
     typealias ImageSourceStub = () -> (ImageSource)
     typealias ImageStub = (ImageSource) -> (UIImage?)
+    typealias DeleteConfirmationStub = () -> Bool
     
     var displayImageSourceSelectionActionSheetStub: ImageSourceStub?
     var displayImagePickerStub: ImageStub?
+    var showDeleteConfirmationAlertStub: DeleteConfirmationStub?
     var reloadDataInvoked = false
     var updatePlaceholderInvocation: (invoked: Bool, isHidden: Bool?) = (false, nil)
     var showImageInvocation: (invoked: Bool, image: Image?) = (false, nil)
@@ -40,6 +42,12 @@ extension GalleryViewSpy: GalleryViewProtocol {
         guard let stub = displayImagePickerStub else { return }
         
         completion(stub(source))
+    }
+    
+    func showDeleteConfirmationAlert(confirmed: @escaping (Bool) -> Void) {
+        guard let stub = showDeleteConfirmationAlertStub else { return }
+        
+        confirmed(stub())
     }
     
     func reloadData() {

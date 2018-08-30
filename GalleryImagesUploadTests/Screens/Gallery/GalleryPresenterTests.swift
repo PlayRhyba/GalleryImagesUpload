@@ -276,13 +276,45 @@ final class GalleryPresenterTests: QuickSpec {
                     sut.viewDidLoad()
                 }
                 
+                it("should display confirmation alert") {
+                    var showDeleteConfirmationAlertInvoked = false
+                    
+                    view.showDeleteConfirmationAlertStub = {
+                        showDeleteConfirmationAlertInvoked = true
+                        
+                        return true
+                    }
+                    
+                    sut.deleteCell(at: indexPathToDelete)
+                    
+                    expect(showDeleteConfirmationAlertInvoked).to(beTrue())
+                }
+                
+                it("should not delete image if user doesn't confirm deleting") {
+                    view.showDeleteConfirmationAlertStub = { false }
+                    
+                    var deleteInvoked = false
+                    
+                    imagesManager.deleteStub = { _ in
+                        deleteInvoked = true
+                        
+                        return .success([])
+                    }
+                    
+                    expect(deleteInvoked).to(beFalse())
+                }
+                
                 it("should display spinner") {
+                    view.showDeleteConfirmationAlertStub = { true }
+                    
                     sut.deleteCell(at: indexPathToDelete)
                     
                     expect(view.showHUDInvoked).to(beTrue())
                 }
                 
                 it("should delete correct image object from storage") {
+                    view.showDeleteConfirmationAlertStub = { true }
+                    
                     let expectedImage = sut.cellPresenter(at: indexPathToDelete)?.image
                     var deletedImage: Image?
                     
@@ -298,6 +330,7 @@ final class GalleryPresenterTests: QuickSpec {
                 }
                 
                 it("should hide spinner") {
+                    view.showDeleteConfirmationAlertStub = { true }
                     imagesManager.deleteStub = { _ in return .success([]) }
                     
                     sut.deleteCell(at: indexPathToDelete)
@@ -306,6 +339,7 @@ final class GalleryPresenterTests: QuickSpec {
                 }
                 
                 it("should reload view's data") {
+                    view.showDeleteConfirmationAlertStub = { true }
                     imagesManager.deleteStub = { _ in return .success([]) }
                     
                     sut.deleteCell(at: indexPathToDelete)
@@ -314,6 +348,7 @@ final class GalleryPresenterTests: QuickSpec {
                 }
                 
                 it("should show placeholder if fetched data is empty") {
+                    view.showDeleteConfirmationAlertStub = { true }
                     imagesManager.deleteStub = { _ in return .success([]) }
                     
                     sut.deleteCell(at: indexPathToDelete)
@@ -323,6 +358,7 @@ final class GalleryPresenterTests: QuickSpec {
                 }
                 
                 it("should hide placeholder if fetched data is not empty") {
+                    view.showDeleteConfirmationAlertStub = { true }
                     imagesManager.deleteStub = { _ in return .success(self.testImages) }
                     
                     sut.deleteCell(at: indexPathToDelete)
@@ -332,6 +368,8 @@ final class GalleryPresenterTests: QuickSpec {
                 }
                 
                 it("should show error with correct message if error occurs") {
+                    view.showDeleteConfirmationAlertStub = { true }
+                    
                     let expectedMessage = "Error occured"
                     
                     imagesManager.deleteStub = { _ in return .failure(.generic(expectedMessage)) }

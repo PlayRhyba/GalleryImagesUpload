@@ -41,6 +41,18 @@ extension GalleryViewController: GalleryViewProtocol {
         present(alert, animated: true)
     }
     
+    func showDeleteConfirmationAlert(confirmed: @escaping (Bool) -> Void) {
+        let alert = UIAlertController(title: "Delete photo?",
+                                      message: "Are you sure you want to delete photo?",
+                                      preferredStyle: .alert)
+        
+        [UIAlertAction(title: "Cancel", style: .cancel, handler: { _ in confirmed(false) }),
+         UIAlertAction(title: "Delete", style: .destructive, handler: { _ in confirmed(true) })]
+            .forEach { alert.addAction($0) }
+        
+        present(alert, animated: true)
+    }
+    
     func displayImagePicker(source: ImageSource, completion: @escaping (UIImage?) -> Void) {
         imagePicker = ImagePicker(viewController: self,
                                   sourceType: source.asSourceType) { [weak self] image in
