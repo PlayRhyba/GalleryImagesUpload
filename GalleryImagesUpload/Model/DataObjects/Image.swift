@@ -38,7 +38,9 @@ extension Image: Hashable {
 // MARK: Comparable
 
 extension Image: Comparable {
+    
     static func < (lhs: Image, rhs: Image) -> Bool {
         return lhs.date < rhs.date
     }
+    
 }
