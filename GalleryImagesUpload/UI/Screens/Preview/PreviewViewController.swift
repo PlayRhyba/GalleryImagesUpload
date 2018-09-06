@@ -14,6 +14,47 @@ final class PreviewViewController: BaseViewController {
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        let leftSwipeRecognizer = UISwipeGestureRecognizer(target: self,
+                                                           action: #selector(handleSwipeLeft))
+        leftSwipeRecognizer.direction = .left
+        
+        let rightSwipeRecognizer = UISwipeGestureRecognizer(target: self,
+                                                            action: #selector(handleSwipeRight))
+        rightSwipeRecognizer.direction = .right
+        
+        view.addGestureRecognizer(leftSwipeRecognizer)
+        view.addGestureRecognizer(rightSwipeRecognizer)
+    }
+    
+}
+
+// MARK: Actions
+
+private extension PreviewViewController {
+    
+    @objc
+    func handleSwipeLeft() {
+        getPresenter()?.presentNext()
+    }
+    
+    @objc
+    func handleSwipeRight() {
+        getPresenter()?.presentPrevious()
+    }
+    
+}
+
+// MARK: Private
+
+private extension PreviewViewController {
+    
+    func getPresenter() -> PreviewPresenterProtocol? {
+        return presenter as? PreviewPresenterProtocol
+    }
+    
 }
 
 // MARK: PreviewViewProtocol

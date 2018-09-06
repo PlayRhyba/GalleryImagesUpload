@@ -11,7 +11,13 @@ import Foundation
 protocol PreviewPresenterProtocol: ScreenPresenterProtocol {
     
     /// Image to display
-    var image: Image? { get set }
+    var images: [Image]? { get set }
+    
+    var index: Int { get set }
+    
+    func presentNext()
+    
+    func presentPrevious()
     
 }
 

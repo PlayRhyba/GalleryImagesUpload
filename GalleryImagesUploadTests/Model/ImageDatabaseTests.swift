@@ -76,7 +76,7 @@ final class ImageDatabaseTests: QuickSpec {
                         return .success(URL(string: "https://firebase.com")!)
                     }
                     
-                    sut.add(image: newImage) { result in
+                    sut.add(images: [newImage]) { result in
                         expect(result.isSuccess).to(beTrue())
                         
                         let actualImages = try? self.jsonDecoder.decode([Image].self, from: uploadedData ?? Data())
@@ -87,7 +87,7 @@ final class ImageDatabaseTests: QuickSpec {
                 }
                 
                 it("should return the updated image set from storage") {
-                    sut.add(image: newImage) { result in
+                    sut.add(images: [newImage]) { result in
                         expect(result.isSuccess).to(beTrue())
                         
                         let actualImageSet = Set<Image>(result.value ?? [])
@@ -118,7 +118,7 @@ final class ImageDatabaseTests: QuickSpec {
                         return .success(URL(string: "https://firebase.com")!)
                     }
                     
-                    sut.delete(image: imageToDelete) { result in
+                    sut.delete(images: [imageToDelete]) { result in
                         expect(result.isSuccess).to(beTrue())
                         
                         let actualImages = try? self.jsonDecoder.decode([Image].self, from: uploadedData ?? Data())
@@ -129,7 +129,7 @@ final class ImageDatabaseTests: QuickSpec {
                 }
                 
                 it("should return the updated image set from storage") {
-                    sut.delete(image: imageToDelete) { result in
+                    sut.delete(images: [imageToDelete]) { result in
                         expect(result.isSuccess).to(beTrue())
                         
                         let actualImageSet = Set<Image>(result.value ?? [])

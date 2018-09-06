@@ -21,7 +21,8 @@ final class GalleryViewSpy {
     var showDeleteConfirmationAlertStub: DeleteConfirmationStub?
     var reloadDataInvoked = false
     var updatePlaceholderInvocation: (invoked: Bool, isHidden: Bool?) = (false, nil)
-    var showImageInvocation: (invoked: Bool, image: Image?) = (false, nil)
+    var updateStateInvocation: (invoked: Bool, state: SelectionState?) = (false, nil)
+    var showImagesInvocation: (invoked: Bool, images: [Image]?, index: Int?) = (false, nil, nil)
     var showHUDInvoked = false
     var showErrorMessageInvocation: (invoked: Bool, errorMessage: String?) = (false, nil)
     var dismissHUDInvoked = false
@@ -58,8 +59,12 @@ extension GalleryViewSpy: GalleryViewProtocol {
         updatePlaceholderInvocation = (true, isHidden)
     }
     
-    func show(image: Image) {
-        showImageInvocation = (true, image)
+    func update(state: SelectionState) {
+        updateStateInvocation = (true, state)
+    }
+    
+    func show(images: [Image], index: Int) {
+        showImagesInvocation = (true, images, index)
     }
     
 }

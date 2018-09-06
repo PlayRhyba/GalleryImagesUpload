@@ -11,7 +11,7 @@
 final class ImageDatabaseStub {
     
     typealias FetchStub = () -> (OperationResult<[Image], OperationError>)
-    typealias ImageStub = (Image) -> (OperationResult<[Image], OperationError>)
+    typealias ImageStub = ([Image]) -> (OperationResult<[Image], OperationError>)
     
     var fetchStub: FetchStub?
     var addStub: ImageStub?
@@ -29,18 +29,18 @@ extension ImageDatabaseStub: ImageDatabaseProtocol {
         completion(fetchStub())
     }
     
-    func add(image: Image,
+    func add(images: [Image],
              completion: @escaping (OperationResult<[Image], OperationError>) -> Void) {
         guard let addStub = addStub else { return }
         
-        completion(addStub(image))
+        completion(addStub(images))
     }
     
-    func delete(image: Image,
+    func delete(images: [Image],
                 completion: @escaping (OperationResult<[Image], OperationError>) -> Void) {
         guard let deleteStub = deleteStub else { return }
         
-        completion(deleteStub(image))
+        completion(deleteStub(images))
     }
     
 }

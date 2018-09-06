@@ -48,6 +48,7 @@ extension GalleryPresenter: GalleryPresenterProtocol {
                 
                 self.imagesManager.upload(image: image) { [weak self] result in
                     self?.getView()?.dismissHUD()
+                    self?.cancel()
                     self?.handleFetchResult(result)
                 }
             }
@@ -139,7 +140,13 @@ extension GalleryPresenter: GalleryCellDelegate {
     }
     
     func didSelect(cell: GalleryCellPresenterProtocol) {
-        getView()?.show(image: cell.image)
+        let images = cellPresenters.map { $0.image }
+        
+        guard let index = images.index(of: cell.image) else {
+            return
+        }
+        
+        getView()?.show(images: images, index: index)
     }
     
 }

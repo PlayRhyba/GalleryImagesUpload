@@ -96,14 +96,16 @@ extension GalleryViewController: GalleryViewProtocol {
         }
     }
     
-    func show(image: Image) {
+    func show(images: [Image], index: Int) {
         let identifier = PreviewViewController.identifier
         
-        guard let vc = storyboard?.instantiateViewController(withIdentifier: identifier) as? PreviewViewController else {
-            return
+        guard let vc = storyboard?.instantiateViewController(withIdentifier: identifier) as? PreviewViewController,
+            let presenter = (vc.presenter as? PreviewPresenterProtocol) else {
+                return
         }
         
-        (vc.presenter as? PreviewPresenterProtocol)?.image = image
+        presenter.images = images
+        presenter.index = index
         
         navigationController?.pushViewController(vc, animated: true)
     }

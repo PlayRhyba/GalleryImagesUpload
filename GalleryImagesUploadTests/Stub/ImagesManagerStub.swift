@@ -46,4 +46,7 @@ extension ImagesManagerStub: ImagesManagerProtocol {
         completion(deleteStub(image))
     }
     
+    func delete(images: [Image],
+                completion: @escaping (OperationResult<[Image], OperationError>) -> Void) {}
+    
 }

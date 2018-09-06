@@ -93,7 +93,7 @@ protocol GalleryViewProtocol: ScreenViewProtocol {
     /// Show selected image
     ///
     /// - Parameter artist: artist
-    func show(image: Image)
+    func show(images: [Image], index: Int)
     
 }
 
