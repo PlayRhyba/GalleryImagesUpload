@@ -66,14 +66,14 @@ extension ImageDatabase: ImageDatabaseProtocol {
         }
     }
     
-    func add(image: Image,
+    func add(images: [Image],
              completion: @escaping (OperationResult<[Image], OperationError>) -> Void) {
-        updateContentFile(modification: .add, image: image, completion: completion)
+        updateContentFile(modification: .add, images: images, completion: completion)
     }
     
-    func delete(image: Image,
+    func delete(images: [Image],
                 completion: @escaping (OperationResult<[Image], OperationError>) -> Void) {
-        updateContentFile(modification: .delete, image: image, completion: completion)
+        updateContentFile(modification: .delete, images: images, completion: completion)
     }
     
 }
@@ -90,7 +90,7 @@ private extension ImageDatabase {
     }
     
     func updateContentFile(modification: ContentFileModificationType,
-                           image: Image,
+                           images: [Image],
                            completion: @escaping (OperationResult<[Image], OperationError>) -> Void) {
         fetch { [weak self] result in
             guard let `self` = self else { return }
@@ -99,16 +99,16 @@ private extension ImageDatabase {
             case .failure(let error):
                 completion(.failure(error))
                 
-            case .success(var images):
+            case .success(var resultImages):
                 switch modification {
                 case .add:
-                    images.append(image)
+                    resultImages.append(contentsOf: images)
                     
                 case .delete:
-                    images = images.filter { $0.uuid != image.uuid }
+                    resultImages = resultImages.filter { !images.contains($0) }
                 }
                 
-                guard let data = try? self.jsonEncoder.encode(images) else {
+                guard let data = try? self.jsonEncoder.encode(resultImages) else {
                     completion(.failure(.serialization("Data can't be encoded")))
                     
                     break
@@ -120,7 +120,7 @@ private extension ImageDatabase {
                         completion(.failure(error))
                         
                     case .success:
-                        completion(.success(images))
+                        completion(.success(resultImages))
                     }
                 }
             }

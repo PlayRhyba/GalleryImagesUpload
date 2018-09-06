@@ -16,17 +16,17 @@ protocol ImageDatabaseProtocol {
     /// Add image
     ///
     /// - Parameters:
-    ///   - image: image object
+    ///   - images: collection of image objects
     ///   - completion: completion handler
-    func add(image: Image,
+    func add(images: [Image],
              completion: @escaping (OperationResult<[Image], OperationError>) -> Void)
     
     /// Delete image
     ///
     /// - Parameters:
-    ///   - image: image object
+    ///   - image: collection of image objects
     ///   - completion: completion handler
-    func delete(image: Image,
+    func delete(images: [Image],
                 completion: @escaping (OperationResult<[Image], OperationError>) -> Void)
     
 }

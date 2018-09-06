@@ -46,7 +46,7 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Bco-RJ-ftA">
-                                                    <rect key="frame" x="81" y="24" width="279" height="21"/>
+                                                    <rect key="frame" x="81" y="24" width="243" height="21"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="21" id="Z51-VV-HLE"/>
                                                     </constraints>
@@ -54,17 +54,40 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GQI-zt-d4u">
+                                                    <rect key="frame" x="332" y="18" width="35" height="35"/>
+                                                    <subviews>
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="rDf-eg-n3F">
+                                                            <rect key="frame" x="8" y="7.5" width="20" height="20"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="20" id="aKo-x5-hGQ"/>
+                                                                <constraint firstAttribute="height" constant="20" id="sBt-Wz-LH9"/>
+                                                            </constraints>
+                                                        </imageView>
+                                                    </subviews>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <constraints>
+                                                        <constraint firstItem="rDf-eg-n3F" firstAttribute="centerX" secondItem="GQI-zt-d4u" secondAttribute="centerX" id="Gk9-Dv-sPq"/>
+                                                        <constraint firstItem="rDf-eg-n3F" firstAttribute="centerY" secondItem="GQI-zt-d4u" secondAttribute="centerY" id="PlR-xk-d1y"/>
+                                                        <constraint firstAttribute="width" constant="35" id="iX9-iW-9g4"/>
+                                                        <constraint firstAttribute="height" constant="35" id="mjX-01-I4t"/>
+                                                    </constraints>
+                                                </view>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="trailing" secondItem="Bco-RJ-ftA" secondAttribute="trailing" constant="15" id="1rY-Wa-a2L"/>
                                                 <constraint firstItem="Bco-RJ-ftA" firstAttribute="leading" secondItem="pr5-8w-jeb" secondAttribute="trailing" constant="12" id="SW6-qr-Dkr"/>
+                                                <constraint firstAttribute="trailing" secondItem="GQI-zt-d4u" secondAttribute="trailing" constant="8" id="T7A-3S-iW0"/>
                                                 <constraint firstItem="pr5-8w-jeb" firstAttribute="top" secondItem="AwD-Y1-mfS" secondAttribute="top" constant="8" id="TG9-jC-dhu"/>
+                                                <constraint firstItem="GQI-zt-d4u" firstAttribute="centerY" secondItem="AwD-Y1-mfS" secondAttribute="centerY" id="V27-4Z-hN4"/>
                                                 <constraint firstAttribute="bottom" secondItem="pr5-8w-jeb" secondAttribute="bottom" constant="8" id="eLf-1v-gHq"/>
+                                                <constraint firstItem="GQI-zt-d4u" firstAttribute="leading" secondItem="Bco-RJ-ftA" secondAttribute="trailing" constant="8" id="jdl-Rz-5Mq"/>
                                                 <constraint firstItem="Bco-RJ-ftA" firstAttribute="centerY" secondItem="AwD-Y1-mfS" secondAttribute="centerY" id="jkN-hu-tCB"/>
                                                 <constraint firstItem="pr5-8w-jeb" firstAttribute="leading" secondItem="AwD-Y1-mfS" secondAttribute="leading" constant="15" id="sBx-ro-l1u"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="checkmarkContainerView" destination="GQI-zt-d4u" id="WIZ-5V-6aw"/>
+                                            <outlet property="checkmarkImageView" destination="rDf-eg-n3F" id="qKF-9d-buu"/>
                                             <outlet property="previewImage" destination="pr5-8w-jeb" id="SmB-VZ-z21"/>
                                             <outlet property="titleLabel" destination="Bco-RJ-ftA" id="1Wg-Nx-P4L"/>
                                         </connections>
@@ -90,11 +113,6 @@
                     </view>
                     <navigationItem key="navigationItem" title="Gallery" id="uEz-yO-rnw">
                         <barButtonItem key="backBarButtonItem" title=" " id="cuq-Vq-t8v"/>
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="Jac-aa-dT0">
-                            <connections>
-                                <action selector="addButtonClicked" destination="BYZ-38-t0r" id="dLP-c1-36Y"/>
-                            </connections>
-                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="placeholderLabel" destination="LzA-v3-fun" id="zBS-kR-kbJ"/>

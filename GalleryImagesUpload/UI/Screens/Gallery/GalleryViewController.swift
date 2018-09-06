@@ -20,6 +20,11 @@ final class GalleryViewController: BaseViewController {
     @IBOutlet private weak var placeholderLabel: UILabel!
     private var imagePicker: ImagePicker?
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setupGestureRecognizers()
+    }
+    
 }
 
 // MARK: GalleryViewProtocol
@@ -42,8 +47,8 @@ extension GalleryViewController: GalleryViewProtocol {
     }
     
     func showDeleteConfirmationAlert(confirmed: @escaping (Bool) -> Void) {
-        let alert = UIAlertController(title: "Delete photo?",
-                                      message: "Are you sure you want to delete photo?",
+        let alert = UIAlertController(title: "Delete image?",
+                                      message: "Are you sure you want to delete selected images?",
                                       preferredStyle: .alert)
         
         [UIAlertAction(title: "Cancel", style: .cancel, handler: { _ in confirmed(false) }),
@@ -69,6 +74,26 @@ extension GalleryViewController: GalleryViewProtocol {
     
     func updatePlaceholder(isHidden: Bool) {
         placeholderLabel.isHidden = isHidden
+    }
+    
+    func update(state: SelectionState) {
+        switch state {
+        case .none:
+            navigationItem.leftBarButtonItem = nil
+            
+            navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add,
+                                                                target: self,
+                                                                action: #selector(addButtonClicked))
+            
+        case .selected(let selected):
+            navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel,
+                                                               target: self,
+                                                               action: #selector(cancelButtonClicked))
+            
+            navigationItem.rightBarButtonItem = selected ? UIBarButtonItem(barButtonSystemItem: .trash,
+                                                                           target: self,
+                                                                           action: #selector(deleteButtonClicked)) : nil
+        }
     }
     
     func show(image: Image) {
@@ -119,15 +144,7 @@ extension GalleryViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        getPresenter()?.selectCell(at: indexPath)
-    }
-    
-    func tableView(_ tableView: UITableView,
-                   commit editingStyle: UITableViewCellEditingStyle,
-                   forRowAt indexPath: IndexPath) {
-        guard editingStyle == .delete else { return }
-        
-        getPresenter()?.deleteCell(at: indexPath)
+        getPresenter()?.handleSelectionOnCell(at: indexPath)
     }
     
 }
@@ -136,8 +153,29 @@ extension GalleryViewController: UITableViewDelegate {
 
 private extension GalleryViewController {
     
-    @IBAction func addButtonClicked() {
+    @objc
+    func addButtonClicked() {
         getPresenter()?.add()
+    }
+    
+    @objc
+    func cancelButtonClicked() {
+        getPresenter()?.cancel()
+    }
+    
+    @objc
+    func deleteButtonClicked() {
+        getPresenter()?.delete()
+    }
+    
+    @objc
+    func handleLongPress(recognizer: UILongPressGestureRecognizer) {
+        let point = recognizer.location(in: tableView)
+        
+        guard let indexPath = tableView.indexPathForRow(at: point),
+            recognizer.state == .began else { return }
+        
+        getPresenter()?.handleLongPressOnCell(at: indexPath)
     }
     
 }
@@ -162,6 +200,13 @@ private extension GalleryViewController {
     
     func getPresenter() -> GalleryPresenterProtocol? {
         return presenter as? GalleryPresenterProtocol
+    }
+    
+    func setupGestureRecognizers() {
+        let longPressRecognizer = UILongPressGestureRecognizer(target: self,
+                                                               action: #selector(handleLongPress))
+        longPressRecognizer.minimumPressDuration = 1.5
+        tableView.addGestureRecognizer(longPressRecognizer)
     }
     
 }

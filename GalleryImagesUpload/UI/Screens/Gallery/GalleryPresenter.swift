@@ -24,6 +24,8 @@ final class GalleryPresenter: ScreenPresenter {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        getView()?.update(state: .none)
+        
         getView()?.showHUD(status: "Fetching images...")
         
         imagesManager.fetchImages { [weak self] result in
@@ -60,25 +62,84 @@ extension GalleryPresenter: GalleryPresenterProtocol {
         return cellPresenters[indexPath.row]
     }
     
-    func selectCell(at indexPath: IndexPath) {
-        let image = cellPresenters[indexPath.row].image
-        getView()?.show(image: image)
+    func handleSelectionOnCell(at indexPath: IndexPath) {
+        let presenter = cellPresenters[indexPath.row]
+        presenter.handleSelection()
     }
     
-    func deleteCell(at indexPath: IndexPath) {
+    func handleLongPressOnCell(at indexPath: IndexPath) {
+        cellPresenters.forEach { $0.state = .selected(false) }
+    }
+    
+    func cancel() {
+        cellPresenters.forEach { $0.state = .none }
+    }
+    
+    func delete() {
+        let images = self.cellPresenters
+            .filter {
+                if case .selected(let selected) = $0.state, selected {
+                    return true
+                }
+                
+                return false
+            }
+            .map { $0.image }
+        
+        guard !images.isEmpty else { return }
+        
         getView()?.showDeleteConfirmationAlert { [weak self] confirmed in
             guard confirmed,
                 let `self` = self else { return }
             
-            let image = self.cellPresenters[indexPath.row].image
+            self.getView()?.showHUD(status: "Removing images...")
             
-            self.getView()?.showHUD(status: "Removing image...")
-            
-            self.imagesManager.delete(image: image) { [weak self] result in
+            self.imagesManager.delete(images: images) { [weak self] result in
                 self?.getView()?.dismissHUD()
+                self?.cancel()
                 self?.handleFetchResult(result)
             }
         }
+    }
+    
+}
+
+extension GalleryPresenter: GalleryCellDelegate {
+    
+    func didChangeState(cell: GalleryCellPresenterProtocol) {
+        getView()?.reloadData()
+        
+        let state: SelectionState = {
+            let selected = cellPresenters.filter {
+                if case .selected = $0.state {
+                    return true
+                }
+                
+                return false
+            }
+            
+            if selected.isEmpty {
+                return .none
+            }
+            
+            if selected.contains(where: {
+                if case .selected(let selected) = $0.state, selected {
+                    return true
+                }
+                
+                return false
+            }) {
+                return .selected(true)
+            }
+            
+            return .selected(false)
+        }()
+        
+        getView()?.update(state: state)
+    }
+    
+    func didSelect(cell: GalleryCellPresenterProtocol) {
+        getView()?.show(image: cell.image)
     }
     
 }
@@ -94,7 +155,7 @@ private extension GalleryPresenter {
     func reloadData(images: [Image]) {
         cellPresenters = images
             .sorted(by: >)
-            .map { GalleryCellPresenter(image: $0) }
+            .map { GalleryCellPresenter(image: $0, delegate: self) }
         
         getView()?.reloadData()
         getView()?.updatePlaceholder(isHidden: !cellPresenters.isEmpty)

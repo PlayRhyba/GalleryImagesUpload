@@ -76,7 +76,7 @@ extension ImagesManager: ImagesManagerProtocol {
                                               original: urls.original,
                                               preview: urls.preview)
                             
-                            self?.imageDatabase.add(image: image, completion: completion)
+                            self?.imageDatabase.add(images: [image], completion: completion)
                         }
                     }
                 }
@@ -104,11 +104,16 @@ extension ImagesManager: ImagesManagerProtocol {
                         completion(.failure(.dataLoader(error.localizedDescription)))
                         
                     case .success:
-                        self?.imageDatabase.delete(image: image, completion: completion)
+                        self?.imageDatabase.delete(images: [image], completion: completion)
                     }
                 }
             }
         }
+    }
+    
+    func delete(images: [Image],
+                completion: @escaping (OperationResult<[Image], OperationError>) -> Void) {
+        imageDatabase.delete(images: images, completion: completion)
     }
     
 }

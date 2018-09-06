@@ -13,11 +13,16 @@ final class GalleryCell: BaseTableViewCell {
     
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var previewImage: UIImageView!
+    @IBOutlet weak var checkmarkContainerView: UIView!
+    @IBOutlet weak var checkmarkImageView: UIImageView!
     
     // MARK: Lifecycle
     
     override func prepareForReuse() {
         super.prepareForReuse()
+        
+        setupAppearance()
+        
         previewImage.image = nil
     }
     
@@ -33,6 +38,37 @@ extension GalleryCell: GalleryCellViewProtocol {
         if let previewURL = previewURL {
             previewImage.af_setImage(withURL: previewURL)
         }
+    }
+    
+    func update(state: SelectionState) {
+        switch state {
+        case .none:
+            checkmarkContainerView.isHidden = true
+            
+        case .selected(let selected):
+            checkmarkContainerView.isHidden = false
+            checkmarkImageView.isHidden = !selected
+        }
+    }
+    
+}
+
+// MARK: Private
+
+private extension GalleryCell {
+    
+    func getPresenter() -> GalleryCellPresenterProtocol? {
+        return presenter as? GalleryCellPresenterProtocol
+    }
+    
+    func setupAppearance() {
+        checkmarkContainerView.backgroundColor = .clear
+        checkmarkContainerView.layer.cornerRadius = checkmarkContainerView.frame.width / 2.0
+        checkmarkContainerView.layer.borderWidth = 1.0
+        checkmarkContainerView.layer.borderColor = UIColor.black.cgColor
+        
+        checkmarkImageView.backgroundColor = .green
+        checkmarkImageView.layer.cornerRadius = checkmarkImageView.frame.width / 2.0
     }
     
 }

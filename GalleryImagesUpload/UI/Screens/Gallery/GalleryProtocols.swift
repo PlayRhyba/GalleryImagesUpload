@@ -27,12 +27,16 @@ protocol GalleryPresenterProtocol: ScreenPresenterProtocol {
     /// Select cell at index path
     ///
     /// - Parameter indexPath: index path
-    func selectCell(at indexPath: IndexPath)
+    func handleSelectionOnCell(at indexPath: IndexPath)
     
-    /// Delete cell at index path
+    /// Handle the long press on cell at index path
     ///
-    /// - Parameter indexPath: index path
-    func deleteCell(at indexPath: IndexPath)
+    /// - Parameter indexPath: indexPath
+    func handleLongPressOnCell(at indexPath: IndexPath)
+    
+    func cancel()
+    
+    func delete()
     
 }
 
@@ -44,6 +48,13 @@ enum ImageSource {
     
     case library
     case camera
+    
+}
+
+enum SelectionState {
+    
+    case none
+    case selected(Bool)
     
 }
 
@@ -74,6 +85,11 @@ protocol GalleryViewProtocol: ScreenViewProtocol {
     /// - Parameter isHidden: is placeholder hidden
     func updatePlaceholder(isHidden: Bool)
     
+    /// Update view operation state
+    ///
+    /// - Parameter state: view operation state
+    func update(state: SelectionState)
+    
     /// Show selected image
     ///
     /// - Parameter artist: artist
@@ -81,10 +97,24 @@ protocol GalleryViewProtocol: ScreenViewProtocol {
     
 }
 
+protocol GalleryCellDelegate: class {
+    
+    func didChangeState(cell: GalleryCellPresenterProtocol)
+    
+    func didSelect(cell: GalleryCellPresenterProtocol)
+    
+}
+
 protocol GalleryCellPresenterProtocol: PresenterProtocol {
     
     /// Image
     var image: Image { get }
+    
+    var delegate: GalleryCellDelegate? { get }
+    
+    var state: SelectionState { get set }
+    
+    func handleSelection()
     
 }
 
@@ -96,5 +126,10 @@ protocol GalleryCellViewProtocol: ViewProtocol {
     ///   - title: title
     ///   - previewURL: preview URL
     func update(title: String?, previewURL: URL?)
+    
+    /// Update selection state
+    ///
+    /// - Parameter state: state
+    func update(state: SelectionState)
     
 }

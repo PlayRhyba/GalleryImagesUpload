@@ -31,4 +31,12 @@ protocol ImagesManagerProtocol {
     func delete(image: Image,
                 completion: @escaping (OperationResult<[Image], OperationError>) -> Void)
     
+    /// Remove images
+    ///
+    /// - Parameters:
+    ///   - image: images to removew
+    ///   - completion: completion handler with updated array of stored images
+    func delete(images: [Image],
+                completion: @escaping (OperationResult<[Image], OperationError>) -> Void)
+    
 }
