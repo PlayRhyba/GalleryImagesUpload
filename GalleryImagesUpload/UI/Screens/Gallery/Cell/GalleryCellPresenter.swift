@@ -12,20 +12,17 @@ final class GalleryCellPresenter: Presenter {
     
     let image: Image
     
-    var state: SelectionState = .none {
+    var state: SelectionState {
         didSet {
             getView()?.update(state: state)
-            delegate?.didChangeState(cell: self)
         }
     }
     
-    weak var delegate: GalleryCellDelegate?
-    
     // MARK: Initialization
     
-    init(image: Image, delegate: GalleryCellDelegate? = nil) {
+    init(image: Image, state: SelectionState = .none) {
         self.image = image
-        self.delegate = delegate
+        self.state = state
     }
     
     // MARK: Presenter
@@ -35,6 +32,8 @@ final class GalleryCellPresenter: Presenter {
         
         getView()?.update(title: DateFormatter.displaying.string(from: image.date),
                           previewURL: image.preview)
+        
+        getView()?.update(state: state)
     }
     
 }
@@ -43,15 +42,16 @@ final class GalleryCellPresenter: Presenter {
 
 extension GalleryCellPresenter: GalleryCellPresenterProtocol {
     
-    func handleSelection() {
+    func toggleState() {
         switch state {
         case .none:
-            delegate?.didSelect(cell: self)
+            break
             
-        case .selected(let selected):
-            state = .selected(!selected)
-            getView()?.update(state: state)
-            delegate?.didChangeState(cell: self)
+        case .selected:
+            state = .unselected
+            
+        case .unselected:
+            state = .selected
         }
     }
     

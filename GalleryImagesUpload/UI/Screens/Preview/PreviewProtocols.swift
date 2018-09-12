@@ -13,10 +13,13 @@ protocol PreviewPresenterProtocol: ScreenPresenterProtocol {
     /// Image to display
     var images: [Image]? { get set }
     
+    /// Current displayed image index
     var index: Int { get set }
     
+    /// Present next image
     func presentNext()
     
+    /// Present previous image
     func presentPrevious()
     
 }

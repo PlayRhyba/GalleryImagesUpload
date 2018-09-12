@@ -10,6 +10,9 @@ import UIKit
 
 protocol GalleryPresenterProtocol: ScreenPresenterProtocol {
     
+    /// State
+    var state: SelectionState { get }
+    
     /// Add photo
     func add()
     
@@ -34,8 +37,10 @@ protocol GalleryPresenterProtocol: ScreenPresenterProtocol {
     /// - Parameter indexPath: indexPath
     func handleLongPressOnCell(at indexPath: IndexPath)
     
+    /// Handle cancel action
     func cancel()
     
+    /// Handle delete action
     func delete()
     
 }
@@ -51,10 +56,16 @@ enum ImageSource {
     
 }
 
+/// Selection stae
+///
+/// - none: isdle
+/// - selected: selected
+/// - unselected: unselected
 enum SelectionState {
     
     case none
-    case selected(Bool)
+    case selected
+    case unselected
     
 }
 
@@ -97,24 +108,16 @@ protocol GalleryViewProtocol: ScreenViewProtocol {
     
 }
 
-protocol GalleryCellDelegate: class {
-    
-    func didChangeState(cell: GalleryCellPresenterProtocol)
-    
-    func didSelect(cell: GalleryCellPresenterProtocol)
-    
-}
-
 protocol GalleryCellPresenterProtocol: PresenterProtocol {
     
     /// Image
     var image: Image { get }
     
-    var delegate: GalleryCellDelegate? { get }
-    
+    /// State
     var state: SelectionState { get set }
     
-    func handleSelection()
+    /// Toggle state
+    func toggleState()
     
 }
 

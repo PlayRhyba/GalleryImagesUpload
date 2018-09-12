@@ -85,14 +85,20 @@ extension GalleryViewController: GalleryViewProtocol {
                                                                 target: self,
                                                                 action: #selector(addButtonClicked))
             
-        case .selected(let selected):
+        case .unselected:
+            navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel,
+                                                               target: self,
+                                                               action: #selector(cancelButtonClicked))
+            navigationItem.rightBarButtonItem = nil
+            
+        case .selected:
             navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel,
                                                                target: self,
                                                                action: #selector(cancelButtonClicked))
             
-            navigationItem.rightBarButtonItem = selected ? UIBarButtonItem(barButtonSystemItem: .trash,
-                                                                           target: self,
-                                                                           action: #selector(deleteButtonClicked)) : nil
+            navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .trash,
+                                                                target: self,
+                                                                action: #selector(deleteButtonClicked))
         }
     }
     

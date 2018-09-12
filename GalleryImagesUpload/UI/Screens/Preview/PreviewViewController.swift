@@ -16,17 +16,7 @@ final class PreviewViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        let leftSwipeRecognizer = UISwipeGestureRecognizer(target: self,
-                                                           action: #selector(handleSwipeLeft))
-        leftSwipeRecognizer.direction = .left
-        
-        let rightSwipeRecognizer = UISwipeGestureRecognizer(target: self,
-                                                            action: #selector(handleSwipeRight))
-        rightSwipeRecognizer.direction = .right
-        
-        view.addGestureRecognizer(leftSwipeRecognizer)
-        view.addGestureRecognizer(rightSwipeRecognizer)
+        setupGestureRecognizers()
     }
     
 }
@@ -53,6 +43,21 @@ private extension PreviewViewController {
     
     func getPresenter() -> PreviewPresenterProtocol? {
         return presenter as? PreviewPresenterProtocol
+    }
+    
+    func setupGestureRecognizers() {
+        let leftSwipeRecognizer = UISwipeGestureRecognizer(target: self,
+                                                           action: #selector(handleSwipeLeft))
+        leftSwipeRecognizer.direction = .left
+        
+        view.addGestureRecognizer(leftSwipeRecognizer)
+        
+        let rightSwipeRecognizer = UISwipeGestureRecognizer(target: self,
+                                                            action: #selector(handleSwipeRight))
+        rightSwipeRecognizer.direction = .right
+        
+        
+        view.addGestureRecognizer(rightSwipeRecognizer)
     }
     
 }

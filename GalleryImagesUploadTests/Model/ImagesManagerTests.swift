@@ -84,20 +84,20 @@ final class ImagesManagerTests: QuickSpec {
                         }
                     }
                     
-                    var addedImage: Image?
+                    var addedImages: [Image]?
                     
-                    imageDatabase.addStub = { image in
-                        addedImage = image
+                    imageDatabase.addStub = { images in
+                        addedImages = images
                         
-                        return .success([image])
+                        return .success(images)
                     }
                     
                     sut.upload(image: UIImage()) { result in
                         expect(result.isSuccess).to(beTrue())
                         
-                        expect(addedImage?.uuid).toNot(beEmpty())
-                        expect(addedImage?.original).to(equal(originalDataURL))
-                        expect(addedImage?.preview).to(equal(previewDataURL))
+                        expect(addedImages?.first?.uuid).toNot(beEmpty())
+                        expect(addedImages?.first?.original).to(equal(originalDataURL))
+                        expect(addedImages?.first?.preview).to(equal(previewDataURL))
                     }
                 }
             }

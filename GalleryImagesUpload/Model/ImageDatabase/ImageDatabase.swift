@@ -105,7 +105,9 @@ private extension ImageDatabase {
                     resultImages.append(contentsOf: images)
                     
                 case .delete:
-                    resultImages = resultImages.filter { !images.contains($0) }
+                    resultImages = resultImages.filter { image in
+                        !images.contains { image.uuid == $0.uuid }
+                    }
                 }
                 
                 guard let data = try? self.jsonEncoder.encode(resultImages) else {

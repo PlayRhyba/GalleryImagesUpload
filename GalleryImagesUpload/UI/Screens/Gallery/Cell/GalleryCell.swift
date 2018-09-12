@@ -20,9 +20,7 @@ final class GalleryCell: BaseTableViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        
         setupAppearance()
-        
         previewImage.image = nil
     }
     
@@ -45,9 +43,13 @@ extension GalleryCell: GalleryCellViewProtocol {
         case .none:
             checkmarkContainerView.isHidden = true
             
-        case .selected(let selected):
+        case .selected:
             checkmarkContainerView.isHidden = false
-            checkmarkImageView.isHidden = !selected
+            checkmarkImageView.isHidden = false
+            
+        case .unselected:
+            checkmarkContainerView.isHidden = false
+            checkmarkImageView.isHidden = true
         }
     }
     

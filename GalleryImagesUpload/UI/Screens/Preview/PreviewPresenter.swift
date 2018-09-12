@@ -11,7 +11,6 @@ import Foundation
 final class PreviewPresenter: ScreenPresenter {
     
     var images: [Image]?
-    
     var index: Int = 0
     
     // MARK: Presenter
@@ -31,7 +30,7 @@ extension PreviewPresenter: PreviewPresenterProtocol {
     
     func presentNext() {
         guard let images = images,
-            index < images.count else { return }
+            index < images.count - 1 else { return }
         
         index += 1
         
